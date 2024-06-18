@@ -6,8 +6,6 @@ export const databaseProviders = [
     provide: 'DATA_SOURCE',
     imports: [ConfigModule],
     useFactory: async (configService: ConfigService) => {
-      console.log(configService.get<string>('POSTGRES_DATABASE'));
-
       const dataSource = new DataSource({
         type: 'postgres',
         host: configService.get<string>('POSTGRES_HOST'),
