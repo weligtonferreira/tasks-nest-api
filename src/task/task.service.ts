@@ -6,21 +6,24 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 
 import { Task } from './entities/task.entity';
 
+import { ITaskService } from './interfaces/ITaskService';
+import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
+
 import { NotFoundError } from 'src/errors/NotFoundError';
 
 @Injectable()
-export class TaskService {
+export class TaskService implements ITaskService {
   constructor(
     @Inject('TASK_REPOSITORY') private taskRepository: Repository<Task>,
   ) {}
 
-  async create(createTaskDto: CreateTaskDto) {
+  async create(createTaskDto: CreateTaskDto): Promise<ICreatedTaskResponse> {
     const newTask = await this.taskRepository.save(createTaskDto);
 
     return { id: newTask.id };
   }
 
-  async findAll() {
+  async findAll(): Promise<Task[]> {
     const tasks = await this.taskRepository.find();
 
     if (tasks.length === 0) {
@@ -30,7 +33,7 @@ export class TaskService {
     return tasks;
   }
 
-  async findById(id: string) {
+  async findById(id: string): Promise<Task[]> {
     const task = await this.taskRepository.find({ where: { id } });
 
     if (task.length === 0) {
@@ -40,13 +43,13 @@ export class TaskService {
     return task;
   }
 
-  async updateById(id: string, updateTaskDto: UpdateTaskDto) {
+  async updateById(id: string, updateTaskDto: UpdateTaskDto): Promise<void> {
     await this.findById(id);
 
     this.taskRepository.update(id, updateTaskDto);
   }
 
-  async removeById(id: string) {
+  async removeById(id: string): Promise<void> {
     await this.findById(id);
 
     this.taskRepository.delete(id);
