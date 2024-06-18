@@ -13,32 +13,42 @@ import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 
+import { Task } from './entities/task.entity';
+
+import { ITaskController } from './interfaces/ITaskController';
+import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
+
 @Controller('tasks')
-export class TaskController {
+export class TaskController implements ITaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto) {
-    return this.taskService.create(createTaskDto);
+  async create(
+    @Body() createTaskDto: CreateTaskDto,
+  ): Promise<ICreatedTaskResponse> {
+    return await this.taskService.create(createTaskDto);
   }
 
   @Get()
-  findAll() {
-    return this.taskService.findAll();
+  async findAll(): Promise<Task[]> {
+    return await this.taskService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.taskService.findOne(id);
+  findById(@Param('id') id: string): Promise<Task[]> {
+    return this.taskService.findById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-    return this.taskService.update(id, updateTaskDto);
+  async updateById(
+    @Param('id') id: string,
+    @Body() updateTaskDto: UpdateTaskDto,
+  ): Promise<void> {
+    return await this.taskService.updateById(id, updateTaskDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.taskService.remove(id);
+  async removeById(@Param('id') id: string): Promise<void> {
+    return await this.taskService.removeById(id);
   }
 }
