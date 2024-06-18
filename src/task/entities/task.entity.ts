@@ -6,10 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-enum TaskStatusEnum {
-  Pending = 'PENDING',
-  Done = 'DONE',
-}
+import { TaskStatusEnum } from '../enums/task-status-enum';
+
 @Entity('tasks')
 export class Task {
   @PrimaryGeneratedColumn('uuid')
