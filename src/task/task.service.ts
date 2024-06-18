@@ -6,29 +6,49 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 
 import { Task } from './entities/task.entity';
 
+import { NotFoundError } from 'src/errors/NotFoundError';
+
 @Injectable()
 export class TaskService {
   constructor(
     @Inject('TASK_REPOSITORY') private taskRepository: Repository<Task>,
   ) {}
 
-  create(createTaskDto: CreateTaskDto) {
-    return this.taskRepository.save(createTaskDto);
+  async create(createTaskDto: CreateTaskDto) {
+    const newTask = await this.taskRepository.save(createTaskDto);
+
+    return { id: newTask.id };
   }
 
-  findAll() {
-    return this.taskRepository.find();
+  async findAll() {
+    const tasks = await this.taskRepository.find();
+
+    if (tasks.length === 0) {
+      throw new NotFoundError('Tasks not found');
+    }
+
+    return tasks;
   }
 
-  findOne(id: string) {
-    return this.taskRepository.find({ where: { id } });
+  async findById(id: string) {
+    const task = await this.taskRepository.find({ where: { id } });
+
+    if (task.length === 0) {
+      throw new NotFoundError('Task not found');
+    }
+
+    return task;
   }
 
-  update(id: string, updateTaskDto: UpdateTaskDto) {
-    return this.taskRepository.update(id, updateTaskDto);
+  async updateById(id: string, updateTaskDto: UpdateTaskDto) {
+    await this.findById(id);
+
+    this.taskRepository.update(id, updateTaskDto);
   }
 
-  remove(id: string) {
-    return this.taskRepository.delete(id);
+  async removeById(id: string) {
+    await this.findById(id);
+
+    this.taskRepository.delete(id);
   }
 }
