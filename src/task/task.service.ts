@@ -9,7 +9,7 @@ import { Task } from './entities/task.entity';
 import { ITaskService } from './interfaces/ITaskService';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 
-import { NotFoundError } from 'src/errors/NotFoundError';
+import { NotFoundErrorException } from 'src/errors/NotFoundErrorException';
 
 @Injectable()
 export class TaskService implements ITaskService {
@@ -27,7 +27,7 @@ export class TaskService implements ITaskService {
     const tasks = await this.taskRepository.find();
 
     if (tasks.length === 0) {
-      throw new NotFoundError('Tasks not found');
+      throw new NotFoundErrorException('Tasks not found');
     }
 
     return tasks;
@@ -37,7 +37,7 @@ export class TaskService implements ITaskService {
     const task = await this.taskRepository.find({ where: { id } });
 
     if (task.length === 0) {
-      throw new NotFoundError('Task not found');
+      throw new NotFoundErrorException('Task not found');
     }
 
     return task;
