@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 import { HandleAllErrorsExceptionFilter } from './expections-filters/handle-all-errors.exception-filter';
@@ -10,7 +10,10 @@ async function bootstrap() {
   app.useGlobalFilters(new HandleAllErrorsExceptionFilter());
 
   app.useGlobalPipes(
-    new ValidationPipe({ errorHttpStatusCode: 422, transform: true }),
+    new ValidationPipe({
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      transform: true,
+    }),
   );
 
   await app.listen(3000);
