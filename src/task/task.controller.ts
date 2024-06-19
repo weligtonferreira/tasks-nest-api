@@ -11,7 +11,7 @@ import {
   HttpStatus,
   Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
@@ -26,6 +26,7 @@ import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 
 import { TaskStatusEnum } from './enums/task-status-enum';
 
+@ApiTags('tasks')
 @Controller('tasks')
 export class TaskController implements ITaskController {
   constructor(private readonly taskService: TaskService) {}
