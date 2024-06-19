@@ -20,7 +20,10 @@ export class TaskService implements ITaskService {
   ) {}
 
   async create(createTaskDto: CreateTaskDto): Promise<ICreatedTaskResponse> {
-    const newTask = await this.taskRepository.save(createTaskDto);
+    const newTask = await this.taskRepository.save({
+      title: createTaskDto?.title,
+      description: createTaskDto?.descrition,
+    });
 
     return { id: newTask.id };
   }
