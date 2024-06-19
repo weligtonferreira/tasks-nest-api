@@ -80,7 +80,7 @@ export class UserController implements IUserController {
     return await this.userService.findAll();
   }
 
-  @Patch(':id')
+  @Get(':id')
   @ApiOperation({ summary: 'Update an user by ID' })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
