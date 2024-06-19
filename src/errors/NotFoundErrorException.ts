@@ -1,10 +1,9 @@
 import { HttpStatus } from '@nestjs/common';
 
-export class NotFoundErrorException extends Error {
-  statusCode: number;
+import { CustomErrorException } from './CustomErrorException';
 
+export class NotFoundErrorException extends CustomErrorException {
   constructor(message: string) {
-    super(message);
-    this.statusCode = HttpStatus.NOT_FOUND;
+    super(message, HttpStatus.NOT_FOUND);
   }
 }
