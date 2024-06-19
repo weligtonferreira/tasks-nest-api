@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
 
-import { HandleCustomErrorsExceptionFilter } from './expections-filters/handle-custom-errors.exception-filter';
-import { HandleValidationErrorsExceptionFilter } from './expections-filters/handle-validation-errors.exception-filter';
+import { HandleValidationErrorsExceptionFilter } from './exceptions-filters/handle-validation-errors.exception-filter';
+import { HandleCustomErrorsExceptionFilter } from './exceptions-filters/handle-custom-errors.exception-filter';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
