@@ -9,6 +9,8 @@ import { Task } from './entities/task.entity';
 import { ITaskService } from './interfaces/ITaskService';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 
+import { TaskStatusEnum } from './enums/task-status-enum';
+
 import { NotFoundErrorException } from 'src/errors/NotFoundErrorException';
 
 @Injectable()
@@ -31,6 +33,10 @@ export class TaskService implements ITaskService {
     }
 
     return tasks;
+  }
+
+  async findAllByStatus(status: TaskStatusEnum): Promise<Task[]> {
+    return await this.taskRepository.find({ where: { status } });
   }
 
   async findById(id: string): Promise<Task[]> {
