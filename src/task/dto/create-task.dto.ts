@@ -1,34 +1,32 @@
 import {
-  IsDateString,
   IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
-
-import { TaskStatusEnum } from '../enums/task-status-enum';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTaskDto {
+  @ApiProperty({
+    description: 'Title of task',
+    example: 'Make a cake',
+    nullable: false,
+    minLength: 1,
+    maxLength: 255,
+  })
   @MaxLength(255)
   @MinLength(1)
   @IsString()
   @IsNotEmpty()
   title: string;
 
+  @ApiProperty({
+    description: 'Description of task',
+    example: 'Make a delicious chocolate cake',
+    nullable: true,
+  })
   @IsString()
   @IsOptional()
-  descrition: string | null;
-
-  @IsString()
-  @IsOptional()
-  status: TaskStatusEnum | null;
-
-  @IsDateString()
-  @IsOptional()
-  createdAt: Date;
-
-  @IsDateString()
-  @IsOptional()
-  updatedAt: Date;
+  descrition?: string;
 }
