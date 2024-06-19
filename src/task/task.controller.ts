@@ -18,8 +18,8 @@ import { TaskService } from './task.service';
 
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { NotFoundReponseDto } from './dto/not-found-response.dto';
-import { CreatedTaskResponseDto } from './dto/created-task-responde.dto';
+import { NotFoundReponseDto } from '../dto/not-found-response.dto';
+import { CreatedTaskResponseDto } from './dto/created-task-response.dto';
 
 import { ITaskController } from './interfaces/ITaskController';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
