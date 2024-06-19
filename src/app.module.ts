@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
-import { TaskModule } from './entities/task/task.module';
-import { UserModule } from './entities/user/user.module';
+import { TaskModule } from './task/task.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
