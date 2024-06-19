@@ -8,6 +8,7 @@ import { ICreatedUserResponse } from './ICreatedUserResponse';
 export interface IUserService {
   create: (createTaskDto: CreateUserDto) => Promise<ICreatedUserResponse>;
   findAll: () => Promise<User[]>;
+  findById: (id: string) => Promise<User[]>;
   findByEmail: (email: string) => Promise<User[]>;
   updateById: (id: string, updateUserDto: UpdateUserDto) => Promise<void>;
   removeById: (id: string) => Promise<void>;
