@@ -81,10 +81,10 @@ export class UserController implements IUserController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Update an user by ID' })
+  @ApiOperation({ summary: 'List an user by ID' })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
-    description: 'Update the user with the given ID if it exists',
+    description: 'List the user with the given ID if it exists',
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
