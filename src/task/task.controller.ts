@@ -9,20 +9,22 @@ import {
   ParseUUIDPipe,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 
+import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
 
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-
-import { Task } from './entities/task.entity';
+import { NotFoundReponseDto } from './dto/not-found-response.dto';
+import { CreatedTaskResponseDto } from './dto/created-task-responde.dto';
 
 import { ITaskController } from './interfaces/ITaskController';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
-import { NotFoundReponseDto } from './dto/not-found-response.dto';
-import { CreatedTaskResponseDto } from './dto/created-task-responde.dto';
+
+import { TaskStatusEnum } from './enums/task-status-enum';
 
 @Controller('tasks')
 export class TaskController implements ITaskController {
@@ -67,7 +69,11 @@ export class TaskController implements ITaskController {
     description: 'Tasks not found',
     type: [NotFoundReponseDto],
   })
-  async findAll(): Promise<Task[]> {
+  async findAll(@Query('status') status: TaskStatusEnum): Promise<Task[]> {
+    if (status === TaskStatusEnum.Done || status === TaskStatusEnum.Pending) {
+      return await this.taskService.findAllByStatus(status);
+    }
+
     return await this.taskService.findAll();
   }
 
