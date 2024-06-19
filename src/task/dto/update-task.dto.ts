@@ -19,7 +19,7 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
     example: 'Make a delicious chocolate cake',
     nullable: true,
   })
-  descrition?: string;
+  description?: string;
 
   @ApiProperty({
     description: 'Status of the task',

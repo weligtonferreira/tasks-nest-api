@@ -28,5 +28,5 @@ export class CreateTaskDto {
   })
   @IsString()
   @IsOptional()
-  descrition?: string;
+  description?: string;
 }
