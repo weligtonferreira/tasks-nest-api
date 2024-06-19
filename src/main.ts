@@ -4,11 +4,15 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 import { HandleCustomErrorsExceptionFilter } from './expections-filters/handle-custom-errors.exception-filter';
+import { HandleValidationErrorsExceptionFilter } from './expections-filters/handle-validation-errors.exception-filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalFilters(new HandleCustomErrorsExceptionFilter());
+  app.useGlobalFilters(
+    new HandleValidationErrorsExceptionFilter(),
+    new HandleCustomErrorsExceptionFilter(),
+  );
 
   app.useGlobalPipes(
     new ValidationPipe({
