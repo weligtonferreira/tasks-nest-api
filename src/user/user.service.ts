@@ -69,6 +69,10 @@ export class UserService implements IUserService {
     return user;
   }
 
+  async findByEmailForAuthentication(email: string): Promise<User> {
+    return await this.userRepository.findOne({ where: { email } });
+  }
+
   async updateById(id: string, updateUserDto: UpdateUserDto): Promise<void> {
     await this.findById(id);
 
