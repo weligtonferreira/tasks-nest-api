@@ -37,7 +37,15 @@ export class TaskService implements ITaskService {
   }
 
   async findAllByStatus(status: TaskStatusEnum): Promise<Task[]> {
-    return await this.taskRepository.find({ where: { status } });
+    if (status === null || status === undefined) {
+      return await this.findAll();
+    }
+
+    if (status === TaskStatusEnum.Done || status === TaskStatusEnum.Pending) {
+      return await this.taskRepository.find({ where: { status } });
+    } else {
+      throw new BadRequestException('Incorrect status');
+    }
   }
 
   async findById(id: string): Promise<Task[]> {
