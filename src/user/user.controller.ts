@@ -14,8 +14,9 @@ import {
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { User } from './entities/user.entity';
-
 import { UserService } from './user.service';
+
+import { Public } from '../auth/public.decorator';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -32,6 +33,7 @@ import { UserAlreadyExistsExceptionResponseDto } from './dto/user-already-exists
 export class UserController implements IUserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiParam({
