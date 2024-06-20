@@ -86,6 +86,10 @@ export class TaskController implements ITaskController {
 
   @Get(':id')
   @ApiOperation({ summary: 'List a task by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of task',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'List the task with the given ID if it exists',
@@ -103,6 +107,10 @@ export class TaskController implements ITaskController {
   @Patch(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Update a task by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of task',
+  })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Update the task with the given ID if it exists',
@@ -122,6 +130,10 @@ export class TaskController implements ITaskController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete a task by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of task',
+  })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Delete the task with the given ID if it exists',
