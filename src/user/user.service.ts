@@ -10,8 +10,7 @@ import { ICreatedUserResponse } from './interfaces/ICreatedUserResponse';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-import { NotFoundErrorException } from '../errors/NotFoundErrorException';
-import { AlreadyExistsErrorException } from 'src/errors/AlreadyExistsErrorException';
+import { AlreadyExistsException } from 'src/errors/AlreadyExistsException';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -25,7 +24,7 @@ export class UserService implements IUserService {
     });
 
     if (userExists[0] !== undefined) {
-      throw new AlreadyExistsErrorException('User already exists');
+      throw new AlreadyExistsException('User already exists');
     }
 
     const newUser = this.userRepository.create({
