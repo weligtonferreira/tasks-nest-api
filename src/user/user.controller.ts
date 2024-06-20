@@ -25,6 +25,7 @@ import { NotFoundReponseDto } from '../dto/not-found-response.dto';
 
 import { ICreatedUserResponse } from './interfaces/ICreatedUserResponse';
 import { IUserController } from './interfaces/IUserController';
+import { UserAlreadyExistsExceptionResponseDto } from './dto/user-already-exists-exception.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -58,6 +59,11 @@ export class UserController implements IUserController {
     status: HttpStatus.CREATED,
     description: 'Create a new user',
     type: [CreatedUserResponseDto],
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User already exists',
+    type: [UserAlreadyExistsExceptionResponseDto],
   })
   async create(
     @Body() createUserDto: CreateUserDto,
