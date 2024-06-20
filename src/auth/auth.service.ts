@@ -26,20 +26,12 @@ export class AuthService implements IAuthService {
       throw new UnauthorizedException('Email or password is incorrect');
     }
 
-    const jwtConfig = {
-      payload: {
-        sub: user.id,
-        email: user.email,
-      },
-      options: {
-        expiresIn: '2d',
-        secret: 'SECRET',
-      },
+    const payload = {
+      sub: user.id,
+      email: user.email,
     };
 
-    const { payload, options } = jwtConfig;
-
-    const access_token = await this.jwtService.signAsync(payload, options);
+    const access_token = await this.jwtService.signAsync(payload);
 
     return { access_token };
   }
