@@ -4,9 +4,10 @@ import * as bcrypt from 'bcrypt';
 
 import { UserService } from '../user/user.service';
 import { JwtTokenReponseDto } from './dto/jwt-token-response.dto';
+import { IAuthService } from './interfaces/IAuthService';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements IAuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
