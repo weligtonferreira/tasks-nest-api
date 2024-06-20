@@ -90,7 +90,7 @@ export class UserController implements IUserController {
   @Get(':id')
   @ApiOperation({ summary: 'List an user by ID' })
   @ApiResponse({
-    status: HttpStatus.NO_CONTENT,
+    status: HttpStatus.OK,
     description: 'List the user with the given ID if it exists',
   })
   @ApiResponse({
@@ -105,7 +105,7 @@ export class UserController implements IUserController {
   @Get()
   @ApiOperation({ summary: 'List an user by email' })
   @ApiResponse({
-    status: HttpStatus.NO_CONTENT,
+    status: HttpStatus.OK,
     description: 'List the user with the given email if it exists',
   })
   @ApiResponse({
