@@ -89,6 +89,10 @@ export class UserController implements IUserController {
 
   @Get(':id')
   @ApiOperation({ summary: 'List an user by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of user',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'List the user with the given ID if it exists',
@@ -124,6 +128,10 @@ export class UserController implements IUserController {
   @Patch(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Update an user by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of user',
+  })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Update the user with the given ID if it exists',
@@ -143,6 +151,10 @@ export class UserController implements IUserController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Delete an user by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of user',
+  })
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Delete the user with the given ID if it exists',
