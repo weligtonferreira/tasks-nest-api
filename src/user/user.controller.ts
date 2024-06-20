@@ -21,7 +21,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindUserByEmailDto } from './dto/find-user-by-email.dto';
 import { CreatedUserResponseDto } from './dto/created-user-response.dto';
-import { NotFoundReponseDto } from '../dto/not-found-response.dto';
+import { UserNotFoundExceptionResponseDto } from './dto/user-not-found-exception-response.dto';
 
 import { ICreatedUserResponse } from './interfaces/ICreatedUserResponse';
 import { IUserController } from './interfaces/IUserController';
@@ -81,7 +81,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Users not found',
-    type: [NotFoundReponseDto],
+    type: [UserNotFoundExceptionResponseDto],
   })
   async findAll(): Promise<User[]> {
     return await this.userService.findAll();
@@ -97,7 +97,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'User not found',
-    type: [NotFoundReponseDto],
+    type: [UserNotFoundExceptionResponseDto],
   })
   async findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<User> {
     return await this.userService.findById(id);
@@ -113,7 +113,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'User not found',
-    type: [NotFoundReponseDto],
+    type: [UserNotFoundExceptionResponseDto],
   })
   async findByEmail(
     @Query('email') findUserDto: FindUserByEmailDto,
@@ -131,7 +131,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'User not found',
-    type: [NotFoundReponseDto],
+    type: [UserNotFoundExceptionResponseDto],
   })
   async updateById(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -150,7 +150,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'User not found',
-    type: [NotFoundReponseDto],
+    type: [UserNotFoundExceptionResponseDto],
   })
   async removeById(
     @Param('id', new ParseUUIDPipe()) id: string,
