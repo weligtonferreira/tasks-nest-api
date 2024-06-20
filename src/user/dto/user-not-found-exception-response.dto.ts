@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class UserNotFoundExceptionResponseDto {
   @ApiProperty({
     nullable: true,
-    example: 'Task not found',
+    example: 'User not found',
     description: 'Message of error',
   })
   message: string;
