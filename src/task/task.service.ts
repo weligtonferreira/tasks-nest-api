@@ -9,7 +9,7 @@ import { Task } from './entities/task.entity';
 import { ITaskService } from './interfaces/ITaskService';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 
-import { TaskStatusEnum } from './enums/task-status-enum';
+import { TaskStatusEnum, isValidStatus } from './enums/task-status-enum';
 
 import { NotFoundException } from 'src/errors/NotFoundException';
 import { BadRequestException } from 'src/errors/BadRequestException';
@@ -37,11 +37,11 @@ export class TaskService implements ITaskService {
   }
 
   async findAllByStatus(status: TaskStatusEnum): Promise<Task[]> {
-    if (status === null || status === undefined) {
+    if (status === undefined) {
       return await this.findAll();
     }
 
-    if (status === TaskStatusEnum.Done || status === TaskStatusEnum.Pending) {
+    if (isValidStatus(status)) {
       return await this.taskRepository.find({ where: { status } });
     } else {
       throw new BadRequestException('Incorrect status');
