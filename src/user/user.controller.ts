@@ -91,9 +91,7 @@ export class UserController implements IUserController {
     description: 'User not found',
     type: [NotFoundReponseDto],
   })
-  async findById(
-    @Param('id', new ParseUUIDPipe()) id: string,
-  ): Promise<User[]> {
+  async findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<User> {
     return await this.userService.findById(id);
   }
 
