@@ -18,8 +18,8 @@ import { TaskService } from './task.service';
 
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { NotFoundReponseDto } from '../dto/not-found-response.dto';
 import { CreatedTaskResponseDto } from './dto/created-task-response.dto';
+import { TaskNotFoundExceptionResponseDto } from './dto/task-not-found-exception-response.dto';
 
 import { ITaskController } from './interfaces/ITaskController';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
@@ -68,7 +68,7 @@ export class TaskController implements ITaskController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Tasks not found',
-    type: [NotFoundReponseDto],
+    type: [TaskNotFoundExceptionResponseDto],
   })
   async findAll(@Query('status') status: TaskStatusEnum): Promise<Task[]> {
     if (status === TaskStatusEnum.Done || status === TaskStatusEnum.Pending) {
@@ -88,7 +88,7 @@ export class TaskController implements ITaskController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Task not found',
-    type: [NotFoundReponseDto],
+    type: [TaskNotFoundExceptionResponseDto],
   })
   findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<Task[]> {
     return this.taskService.findById(id);
@@ -104,7 +104,7 @@ export class TaskController implements ITaskController {
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: 'Task not found',
-    type: [NotFoundReponseDto],
+    type: [TaskNotFoundExceptionResponseDto],
   })
   async updateById(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -119,7 +119,7 @@ export class TaskController implements ITaskController {
   @ApiResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'Delete the task with the given ID if it exists',
-    type: [NotFoundReponseDto],
+    type: [TaskNotFoundExceptionResponseDto],
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
