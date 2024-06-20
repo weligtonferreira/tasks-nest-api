@@ -52,7 +52,7 @@ export class UserService implements IUserService {
   async findById(id: string): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
 
-    if (user !== null) {
+    if (!user) {
       throw new NotFoundException('User not found');
     }
 
@@ -62,7 +62,7 @@ export class UserService implements IUserService {
   async findByEmail(email: string): Promise<User> {
     const user = await this.userRepository.findOne({ where: { email } });
 
-    if (user !== null) {
+    if (!user) {
       throw new NotFoundException('User not found');
     }
 
