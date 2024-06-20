@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 import { User } from './entities/user.entity';
 
@@ -10,6 +11,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 import { NotFoundErrorException } from '../errors/NotFoundErrorException';
+import { AlreadyExistsErrorException } from 'src/errors/AlreadyExistsErrorException';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -18,7 +20,21 @@ export class UserService implements IUserService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<ICreatedUserResponse> {
-    const newUser = await this.userRepository.save(createUserDto);
+    const userExists = await this.userRepository.find({
+      where: { email: createUserDto.email },
+    });
+
+    if (userExists[0] !== undefined) {
+      throw new AlreadyExistsErrorException('User already exists');
+    }
+
+    const newUser = this.userRepository.create({
+      username: createUserDto.username,
+      email: createUserDto.email,
+      password: await bcrypt.hash(createUserDto.password, 8),
+    });
+
+    await this.userRepository.save(newUser);
 
     return { id: newUser.id };
   }
@@ -33,29 +49,37 @@ export class UserService implements IUserService {
     return users;
   }
 
-  async findById(id: string): Promise<User[]> {
-    const user = await this.userRepository.find({ where: { id } });
+  async findById(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
 
-    if (user.length === 0) {
+    if (user !== null) {
       throw new NotFoundErrorException('User not found');
     }
 
     return user;
   }
 
-  async findByEmail(email: string): Promise<User[]> {
-    return this.userRepository.find({ where: { email } });
+  async findByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (user !== null) {
+      throw new NotFoundErrorException('User not found');
+    }
+
+    return user;
   }
 
   async updateById(id: string, updateUserDto: UpdateUserDto): Promise<void> {
     await this.findById(id);
 
-    this.userRepository.update(id, updateUserDto);
+    updateUserDto.password = await bcrypt.hash(updateUserDto.password, 8);
+
+    await this.userRepository.update(id, updateUserDto);
   }
 
   async removeById(id: string): Promise<void> {
     await this.findById(id);
 
-    this.userRepository.delete(id);
+    await this.userRepository.delete(id);
   }
 }
