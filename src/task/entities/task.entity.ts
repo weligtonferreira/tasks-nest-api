@@ -13,7 +13,7 @@ import { TaskStatusEnum } from '../enums/task-status-enum';
 export class Task {
   @PrimaryGeneratedColumn('uuid')
   @ApiProperty({
-    description: 'ID of Task',
+    description: 'ID of task',
     example: '77eec609-2b03-4707-a757-8653ce7c0652',
     type: 'UUID',
     nullable: true,
