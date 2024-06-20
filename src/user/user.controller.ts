@@ -92,6 +92,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'List the user with the given ID if it exists',
+    type: [User],
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -107,6 +108,7 @@ export class UserController implements IUserController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'List the user with the given email if it exists',
+    type: [User],
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
