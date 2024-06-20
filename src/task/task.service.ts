@@ -11,7 +11,7 @@ import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 
 import { TaskStatusEnum } from './enums/task-status-enum';
 
-import { NotFoundErrorException } from 'src/errors/NotFoundErrorException';
+import { NotFoundException } from 'src/errors/NotFoundException';
 import { BadRequestErrorException } from 'src/errors/BadRequestErrorException';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class TaskService implements ITaskService {
     const tasks = await this.taskRepository.find();
 
     if (tasks.length === 0) {
-      throw new NotFoundErrorException('Tasks not found');
+      throw new NotFoundException('Tasks not found');
     }
 
     return tasks;
@@ -44,7 +44,7 @@ export class TaskService implements ITaskService {
     const task = await this.taskRepository.find({ where: { id } });
 
     if (task.length === 0) {
-      throw new NotFoundErrorException('Task not found');
+      throw new NotFoundException('Task not found');
     }
 
     return task;
