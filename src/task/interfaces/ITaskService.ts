@@ -11,7 +11,7 @@ export interface ITaskService {
   create: (createTaskDto: CreateTaskDto) => Promise<ICreatedTaskResponse>;
   findAll: () => Promise<Task[]>;
   findAllByStatus(status: TaskStatusEnum): Promise<Task[]>;
-  findById: (id: string) => Promise<Task[]>;
+  findById: (id: string) => Promise<Task>;
   updateById: (id: string, updateTaskDto: UpdateTaskDto) => Promise<void>;
   removeById: (id: string) => Promise<void>;
 }

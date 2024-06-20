@@ -107,7 +107,7 @@ export class TaskController implements ITaskController {
     description: 'Task not found',
     type: [TaskNotFoundExceptionResponseDto],
   })
-  findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<Task[]> {
+  findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<Task> {
     return this.taskService.findById(id);
   }
 

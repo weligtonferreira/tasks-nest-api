@@ -48,10 +48,10 @@ export class TaskService implements ITaskService {
     }
   }
 
-  async findById(id: string): Promise<Task[]> {
-    const task = await this.taskRepository.find({ where: { id } });
+  async findById(id: string): Promise<Task> {
+    const task = await this.taskRepository.findOne({ where: { id } });
 
-    if (task.length === 0) {
+    if (!task) {
       throw new NotFoundException('Task not found');
     }
 
