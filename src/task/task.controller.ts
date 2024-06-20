@@ -66,6 +66,11 @@ export class TaskController implements ITaskController {
 
   @Get()
   @ApiOperation({ summary: 'List all tasks' })
+  @ApiParam({
+    name: 'status',
+    description: 'Status of task',
+    example: 'PENDING, DONE',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Return a list of tasks',
