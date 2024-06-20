@@ -43,14 +43,14 @@ export class UserController implements IUserController {
     name: 'email',
     description: 'E-mail of the user',
     example: 'username@email.com',
-    required: false,
+    required: true,
     type: 'string',
   })
   @ApiParam({
     name: 'password',
     description: 'Password of the user',
     example: 'password',
-    required: false,
+    required: true,
     type: 'string',
   })
   @ApiResponse({
@@ -64,6 +64,7 @@ export class UserController implements IUserController {
     return await this.userService.create(createUserDto);
   }
 
+  @Get()
   @ApiOperation({ summary: 'List all users' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -75,7 +76,6 @@ export class UserController implements IUserController {
     description: 'Users not found',
     type: [NotFoundReponseDto],
   })
-  @Get()
   async findAll(): Promise<User[]> {
     return await this.userService.findAll();
   }
