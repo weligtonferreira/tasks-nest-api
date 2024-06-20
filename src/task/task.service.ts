@@ -12,7 +12,7 @@ import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 import { TaskStatusEnum } from './enums/task-status-enum';
 
 import { NotFoundException } from 'src/errors/NotFoundException';
-import { BadRequestErrorException } from 'src/errors/BadRequestErrorException';
+import { BadRequestException } from 'src/errors/BadRequestException';
 
 @Injectable()
 export class TaskService implements ITaskService {
@@ -57,7 +57,7 @@ export class TaskService implements ITaskService {
       updateTaskDto.status !== TaskStatusEnum.Pending &&
       updateTaskDto.status !== TaskStatusEnum.Done
     ) {
-      throw new BadRequestErrorException('Status is incorrect');
+      throw new BadRequestException('Status is incorrect');
     }
 
     this.taskRepository.update(id, updateTaskDto);
