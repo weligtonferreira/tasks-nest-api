@@ -43,7 +43,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     maxLength: 50,
     nullable: true,
   })
-  @MaxLength(50)
+  @MaxLength(100)
   @MinLength(8)
   @IsString()
   @IsNotEmpty()
