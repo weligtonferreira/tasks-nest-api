@@ -10,6 +10,7 @@ import { ICreatedUserResponse } from './interfaces/ICreatedUserResponse';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+import { NotFoundException } from '../errors/NotFoundException';
 import { AlreadyExistsException } from 'src/errors/AlreadyExistsException';
 
 @Injectable()
@@ -42,7 +43,7 @@ export class UserService implements IUserService {
     const users = await this.userRepository.find();
 
     if (users.length === 0) {
-      throw new NotFoundErrorException('Users not found');
+      throw new NotFoundException('Users not found');
     }
 
     return users;
@@ -52,7 +53,7 @@ export class UserService implements IUserService {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (user !== null) {
-      throw new NotFoundErrorException('User not found');
+      throw new NotFoundException('User not found');
     }
 
     return user;
@@ -62,7 +63,7 @@ export class UserService implements IUserService {
     const user = await this.userRepository.findOne({ where: { email } });
 
     if (user !== null) {
-      throw new NotFoundErrorException('User not found');
+      throw new NotFoundException('User not found');
     }
 
     return user;
