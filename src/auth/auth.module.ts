@@ -20,6 +20,6 @@ import { authProviders } from './auth.provider';
     ConfigModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, ...authProviders],
 })
 export class AuthModule {}
