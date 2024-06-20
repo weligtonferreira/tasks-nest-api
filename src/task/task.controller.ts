@@ -20,6 +20,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { CreatedTaskResponseDto } from './dto/created-task-response.dto';
 import { TaskNotFoundExceptionResponseDto } from './dto/task-not-found-exception-response.dto';
+import { TaskAlreadyExistsExceptionResponseDto } from './dto/task-already-exists-exception.dto';
 
 import { ITaskController } from './interfaces/ITaskController';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
@@ -51,6 +52,11 @@ export class TaskController implements ITaskController {
     status: HttpStatus.CREATED,
     description: 'Create a new task',
     type: [CreatedTaskResponseDto],
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User already exists',
+    type: [TaskAlreadyExistsExceptionResponseDto],
   })
   async create(
     @Body() createTaskDto: CreateTaskDto,
