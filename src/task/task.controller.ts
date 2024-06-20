@@ -21,6 +21,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { CreatedTaskResponseDto } from './dto/created-task-response.dto';
 import { TaskNotFoundExceptionResponseDto } from './dto/task-not-found-exception-response.dto';
 import { TaskAlreadyExistsExceptionResponseDto } from './dto/task-already-exists-exception.dto';
+import { BadRequestExceptionResponseDto } from './dto/bad-request-exception-response.dto';
 
 import { ITaskController } from './interfaces/ITaskController';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
@@ -81,12 +82,13 @@ export class TaskController implements ITaskController {
     description: 'Tasks not found',
     type: [TaskNotFoundExceptionResponseDto],
   })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Status is incorrect',
+    type: [BadRequestExceptionResponseDto],
+  })
   async findAll(@Query('status') status: TaskStatusEnum): Promise<Task[]> {
-    if (status === TaskStatusEnum.Done || status === TaskStatusEnum.Pending) {
-      return await this.taskService.findAllByStatus(status);
-    }
-
-    return await this.taskService.findAll();
+    return await this.taskService.findAllByStatus(status);
   }
 
   @Get(':id')
