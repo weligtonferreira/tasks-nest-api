@@ -7,11 +7,13 @@ import { SignInDto } from '../user/dto/sign-in.dto';
 import { IAuthController } from './interfaces/IAuthController';
 import { JwtTokenReponseDto } from './dto/jwt-token-response.dto';
 import { UnauthorizedExceptionResponseDto } from './dto/unauthorized-exception-response.dto';
+import { Public } from './public.decorator';
 
 @Controller('auth')
 export class AuthController implements IAuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiParam({
