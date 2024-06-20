@@ -1,7 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class NotFoundReponseDto {
+export class TaskNotFoundReponseDto {
   @ApiProperty({
     nullable: true,
     example: 'Task not found',
