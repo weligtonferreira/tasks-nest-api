@@ -19,6 +19,7 @@ import { UserService } from './user.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FindUserByEmailDto } from './dto/find-user-by-email.dto';
 import { CreatedUserResponseDto } from './dto/created-user-response.dto';
 import { NotFoundReponseDto } from '../dto/not-found-response.dto';
 
@@ -106,8 +107,10 @@ export class UserController implements IUserController {
     description: 'User not found',
     type: [NotFoundReponseDto],
   })
-  async findByEmail(@Query('email') email: string): Promise<User[]> {
-    return await this.userService.findByEmail(email);
+  async findByEmail(
+    @Query('email') findUserDto: FindUserByEmailDto,
+  ): Promise<User> {
+    return await this.userService.findByEmail(findUserDto.email);
   }
 
   @Patch(':id')
