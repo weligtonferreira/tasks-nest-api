@@ -19,20 +19,63 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Tasks NestJS API 🎯
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a REST API for task management. This project is a technical challenge for back-end developer.
 
-## Installation
+## 💻 Technologies
+
+- Typescript
+- NestJS
+- TypeORM
+- PostgreSQL
+
+## ✨ Features
+
+- Task Creation: Endpoint to create a new task with title, description and status (pending or completed).
+- Task Listing: Endpoint to list all tasks with the possibility of filtering by status.
+- Task Update: Endpoint to update the title, description or status of a task.
+- Task Deletion: Endpoint to delete a task.
+- Validation and Error Handling: Implement data validation and appropriate error handling.
+- Documentation: Document the API using Swagger or similar.
+- Login: Implement user authentication (user must be logged in to manage tasks).
+
+## ⚙️ Installation
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## 🛠️ Configure ".env" environment variables
+
+```
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USERNAME=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DATABASE=tasks_db
+JWT_SECRET_KEY=your_secret
+```
+
+Use one of these variables to set between development and production mode:
+
+```
+.env.production.local
+.env.development.local
+```
+
+## 🐋 Running Docker Compose
+
+```bash
+# start container
+$ docker compose up -d
+
+# shut down container
+$ docker compose down
+```
+
+## 🚀 Running the app
 
 ```bash
 # development
@@ -45,7 +88,14 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## 📚️ Open the API documentation
+
+```bash
+# development
+$ http://localhost:3000/api
+```
+
+## 🧪 Test
 
 ```bash
 # unit tests
@@ -58,16 +108,16 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## 🤝 Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## 🔍️ Stay in touch
 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
+## 📃 License
 
 Nest is [MIT licensed](LICENSE).
