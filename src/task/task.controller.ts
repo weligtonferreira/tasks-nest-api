@@ -27,12 +27,14 @@ import { ITaskController } from './interfaces/ITaskController';
 import { ICreatedTaskResponse } from './interfaces/ICreatedTaskResponse';
 
 import { TaskStatusEnum } from './enums/task-status-enum';
+import { Public } from '../auth/public.decorator';
 
 @ApiTags('tasks')
 @Controller('tasks')
 export class TaskController implements ITaskController {
   constructor(private readonly taskService: TaskService) {}
 
+  @Public()
   @Post()
   @ApiOperation({ summary: 'Create a new task' })
   @ApiParam({
