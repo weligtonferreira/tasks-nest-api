@@ -76,7 +76,9 @@ export class UserService implements IUserService {
   async updateById(id: string, updateUserDto: UpdateUserDto): Promise<void> {
     await this.findById(id);
 
-    updateUserDto.password = await bcrypt.hash(updateUserDto.password, 8);
+    if (updateUserDto.password) {
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 8);
+    }
 
     await this.userRepository.update(id, updateUserDto);
   }
