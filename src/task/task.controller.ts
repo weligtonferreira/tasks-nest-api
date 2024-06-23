@@ -11,7 +11,13 @@ import {
   HttpStatus,
   Query,
 } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
@@ -30,6 +36,7 @@ import { TaskStatusEnum } from './enums/task-status-enum';
 import { Public } from '../auth/public.decorator';
 
 @ApiTags('tasks')
+@ApiBearerAuth()
 @Controller('tasks')
 export class TaskController implements ITaskController {
   constructor(private readonly taskService: TaskService) {}
