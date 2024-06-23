@@ -18,7 +18,6 @@ async function bootstrap() {
     .setTitle('Tasks API')
     .setDescription('This is a REST API for task management')
     .setVersion('1.0')
-    .addTag('tasks')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
