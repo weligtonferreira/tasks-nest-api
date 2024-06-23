@@ -73,6 +73,7 @@ export class TaskController implements ITaskController {
     name: 'status',
     description: 'Status of task',
     example: 'PENDING, DONE',
+    required: false,
   })
   @ApiResponse({
     status: HttpStatus.OK,
