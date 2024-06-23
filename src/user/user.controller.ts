@@ -44,9 +44,9 @@ export class UserController implements IUserController {
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiParam({
-    name: 'username',
-    description: 'Username of the user',
-    example: 'username',
+    name: 'password',
+    description: 'Password of the user',
+    example: 'password',
     required: true,
     type: 'string',
   })
@@ -58,9 +58,9 @@ export class UserController implements IUserController {
     type: 'string',
   })
   @ApiParam({
-    name: 'password',
-    description: 'Password of the user',
-    example: 'password',
+    name: 'username',
+    description: 'Username of the user',
+    example: 'username',
     required: true,
     type: 'string',
   })
