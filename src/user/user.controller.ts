@@ -11,7 +11,13 @@ import {
   Query,
   ParseUUIDPipe,
 } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
@@ -29,6 +35,7 @@ import { IUserController } from './interfaces/IUserController';
 import { UserAlreadyExistsExceptionResponseDto } from './dto/user-already-exists-exception.dto';
 
 @ApiTags('users')
+@ApiBearerAuth()
 @Controller('users')
 export class UserController implements IUserController {
   constructor(private readonly userService: UserService) {}
