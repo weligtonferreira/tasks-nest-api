@@ -26,7 +26,6 @@ import { Public } from '../auth/public.decorator';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { FindUserByEmailDto } from './dto/find-user-by-email.dto';
 import { CreatedUserResponseDto } from './dto/created-user-response.dto';
 import { UserNotFoundExceptionResponseDto } from './dto/user-not-found-exception-response.dto';
 
@@ -96,6 +95,22 @@ export class UserController implements IUserController {
     return await this.userService.findAll();
   }
 
+  @Get('by-email')
+  @ApiOperation({ summary: 'List an user by email' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'List the user with the given email if it exists',
+    type: [User],
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User not found',
+    type: [UserNotFoundExceptionResponseDto],
+  })
+  async findByEmail(@Query('email') findUserDto: string): Promise<User> {
+    return await this.userService.findByEmail(findUserDto);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'List an user by ID' })
   @ApiParam({
@@ -114,24 +129,6 @@ export class UserController implements IUserController {
   })
   async findById(@Param('id', new ParseUUIDPipe()) id: string): Promise<User> {
     return await this.userService.findById(id);
-  }
-
-  @Get()
-  @ApiOperation({ summary: 'List an user by email' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'List the user with the given email if it exists',
-    type: [User],
-  })
-  @ApiResponse({
-    status: HttpStatus.NOT_FOUND,
-    description: 'User not found',
-    type: [UserNotFoundExceptionResponseDto],
-  })
-  async findByEmail(
-    @Query('email') findUserDto: FindUserByEmailDto,
-  ): Promise<User> {
-    return await this.userService.findByEmail(findUserDto.email);
   }
 
   @Patch(':id')
