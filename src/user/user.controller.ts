@@ -107,8 +107,8 @@ export class UserController implements IUserController {
     description: 'User not found',
     type: [UserNotFoundExceptionResponseDto],
   })
-  async findByEmail(@Query('email') findUserDto: string): Promise<User> {
-    return await this.userService.findByEmail(findUserDto);
+  async findByEmail(@Query('email') email: string): Promise<User> {
+    return await this.userService.findByEmail(email);
   }
 
   @Get(':id')
